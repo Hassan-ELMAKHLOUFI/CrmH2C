@@ -1878,12 +1878,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _images_users_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../images/users.png */ "./public/images/users.png");
-//
-//
-//
-//
-//
+/* harmony import */ var _images_search_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../images/search.png */ "./public/images/search.png");
 //
 //
 //
@@ -1973,7 +1968,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      searchImg: _images_users_png__WEBPACK_IMPORTED_MODULE_0__.default,
+      searchImg: _images_search_png__WEBPACK_IMPORTED_MODULE_0__.default,
       overlayImg: "../images/overlay.png",
       plusImg: "../images/plus.png",
       hamburgerImg: "../images/hamburger.png"
@@ -2005,12 +2000,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       horizontalImg: "/images/horizontal.png",
-      edit: "../images/grid.png"
+      todayTask: [],
+      upcoming: [],
+      newTask: ""
     };
+  },
+  created: function created() {
+    this.fetchTodayTasks();
+    this.fetchUpcoming();
+  },
+  methods: {
+    //Upcoming Task
+    fetchUpcoming: function fetchUpcoming() {
+      var _this = this;
+
+      fetch('/api/upcoming').then(function (res) {
+        return res.json();
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log(data);
+        _this.upcoming = data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    addUpcomingTask: function addUpcomingTask(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var newTask = {
+        "title": this.newTask,
+        "completed": false,
+        "approved": false,
+        "waiting": true
+      };
+      fetch('api/upcoming', {
+        method: 'POST',
+        header: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(newTask)
+      }).then(function () {
+        _this2.upcoming.push(newTask);
+
+        console.log(newTask);
+      });
+      this.newTask = "";
+    },
+    delUpcomingTask: function delUpcomingTask() {},
+    checkedUpcoming: function checkedUpcoming() {},
+    //Today Task method 
+    fetchTodayTasks: function fetchTodayTasks() {}
   }
 });
 
@@ -2028,6 +2116,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Body_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Body.vue */ "./resources/js/components/Body.vue");
+//
+//
 //
 //
 //
@@ -6588,10 +6678,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./public/images/users.png":
-/*!*********************************!*\
-  !*** ./public/images/users.png ***!
-  \*********************************/
+/***/ "./public/images/search.png":
+/*!**********************************!*\
+  !*** ./public/images/search.png ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6599,7 +6689,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/users.png?7f1eadfdb258c7d3daf90ba4f1d7555a");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/search.png?0a54c500144c90d8371209115d7021cd");
 
 /***/ }),
 
@@ -37917,7 +38007,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("LeftBody"), _vm._v(" "), _c("RightBody")], 1)
+  return _c(
+    "div",
+    { attrs: { id: "body" } },
+    [_c("LeftBody"), _vm._v(" "), _c("RightBody")],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -37942,7 +38037,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "Left" }, [
+  return _c("div", { attrs: { id: "left" } }, [
     _c("img", { attrs: { src: _vm.hamburgerImg, alt: "" } }),
     _vm._v(" "),
     _vm._m(0),
@@ -37954,74 +38049,68 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "project" }, [
-      _c("div", { staticClass: "a-project" }, [
-        _c("div", { staticClass: "box-color" }, [
-          _c("img", { attrs: { src: _vm.overlayImg } }),
-          _vm._v(" "),
-          _c("span", [_vm._v("PT")])
-        ]),
-        _vm._v(" "),
-        _c("h6", [_vm._v("Developement")])
-      ]),
+      _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "a-project" }, [
-        _c("div", { staticClass: "box-color" }, [
-          _c("img", { attrs: { src: _vm.overlayImg } }),
+      _c("div", { staticClass: "projects" }, [
+        _c("div", { staticClass: "a-project" }, [
+          _c("div", { staticClass: "box-color" }, [
+            _c("img", { attrs: { src: _vm.overlayImg } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("PT")])
+          ]),
           _vm._v(" "),
-          _c("span", [_vm._v("RA")])
+          _c("h6", [_vm._v("Developement")])
         ]),
         _vm._v(" "),
-        _c("h6", [_vm._v("Design")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "a-project" }, [
-        _c("div", { staticClass: "box-color" }, [
-          _c("img", { attrs: { src: _vm.overlayImg } }),
+        _c("div", { staticClass: "a-project" }, [
+          _c("div", { staticClass: "box-color" }, [
+            _c("img", { attrs: { src: _vm.overlayImg } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("RA")])
+          ]),
           _vm._v(" "),
-          _c("span", [_vm._v("TA")])
+          _c("h6", [_vm._v("Design")])
         ]),
         _vm._v(" "),
-        _c("h6", [_vm._v("Testing")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "a-project" }, [
-        _c("div", { staticClass: "box-color" }, [
-          _c("img", { attrs: { src: _vm.overlayImg } }),
+        _c("div", { staticClass: "a-project" }, [
+          _c("div", { staticClass: "box-color" }, [
+            _c("img", { attrs: { src: _vm.overlayImg } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("TA")])
+          ]),
           _vm._v(" "),
-          _c("span", [_vm._v("MD")])
+          _c("h6", [_vm._v("Testing")])
         ]),
         _vm._v(" "),
-        _c("h6", [_vm._v("Meduim draft")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "a-project" }, [
-        _c("div", { staticClass: "box-color" }, [
-          _c("img", { attrs: { src: _vm.overlayImg } }),
+        _c("div", { staticClass: "a-project" }, [
+          _c("div", { staticClass: "box-color" }, [
+            _c("img", { attrs: { src: _vm.overlayImg } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("MD")])
+          ]),
           _vm._v(" "),
-          _c("span", [_vm._v("LP")])
+          _c("h6", [_vm._v("Meduim draft")])
         ]),
         _vm._v(" "),
-        _c("h6", [_vm._v("Landing Page")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "a-project" }, [
-        _c("div", { staticClass: "box-color" }, [
-          _c("img", { attrs: { src: _vm.overlayImg } }),
+        _c("div", { staticClass: "a-project" }, [
+          _c("div", { staticClass: "box-color" }, [
+            _c("img", { attrs: { src: _vm.overlayImg } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("LP")])
+          ]),
           _vm._v(" "),
-          _c("span", [_vm._v("LP")])
+          _c("h6", [_vm._v("Landing Page")])
         ]),
         _vm._v(" "),
-        _c("h6", [_vm._v("Landing Page")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "a-project" }, [
-        _c("div", { staticClass: "box-color" }, [
-          _c("img", { attrs: { src: _vm.plusImg } }),
+        _c("div", { staticClass: "a-project" }, [
+          _c("div", { staticClass: "box-color" }, [
+            _c("img", { attrs: { src: _vm.plusImg } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("LP")])
+          ]),
           _vm._v(" "),
-          _c("span", [_vm._v("LP")])
-        ]),
-        _vm._v(" "),
-        _c("h6", [_vm._v("Add Project")])
+          _c("h6", [_vm._v("Add Project")])
+        ])
       ])
     ])
   ])
@@ -38036,6 +38125,12 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("h2", [_vm._v(" Let's make project more amazing")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", [_vm._v("Projects "), _c("span", [_vm._v("(18)")])])
   }
 ]
 render._withStripped = true
@@ -38060,15 +38155,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "Right" }, [
+  return _c("div", { attrs: { id: "right" } }, [
     _c("h1", [_vm._v("Developement CRM ")]),
     _vm._v(" "),
     _c("div", { staticClass: "horizontal" }, [
       _c("img", { attrs: { src: _vm.horizontalImg } })
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "Lorem, ipsum dolor sit amet consectetur \n              adipisicing elit. Quaerat cumque facere, modi\n              odio eveniet obcaecati rem. Natus, \n              quibusdam facere et ratione eum necessitatibus!\n         "
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "upcoming" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "form",
+        { attrs: { action: "" }, on: { submit: _vm.addUpcomingTask } },
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newTask,
+                expression: "newTask"
+              }
+            ],
+            attrs: { type: "text" },
+            domProps: { value: _vm.newTask },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.newTask = $event.target.value
+              }
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "tasks-list" },
+        _vm._l(_vm.upcoming, function(upcomingtask) {
+          return _c("li", { key: upcomingtask.id }, [
+            _c("div", { staticClass: "info" }, [
+              _c("div", { staticClass: "left" }, [
+                _c("label", { staticClass: "myCheckbox" }, [
+                  _c("input", {
+                    attrs: { type: "checkbox", name: "test" },
+                    domProps: { checked: upcomingtask.completed },
+                    on: {
+                      change: function($event) {
+                        return _vm.checkedUpcoming(upcomingtask.id)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span")
+                ]),
+                _vm._v(" "),
+                _c("h4", [_vm._v(_vm._s(upcomingtask.title))])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "right" }, [
+                _c("img", { attrs: { src: "/images/edit.png", alt: "" } }),
+                _vm._v(" "),
+                _c("img", {
+                  attrs: { src: "/images/del.png", alt: "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.delUpcoming(_vm.upcomingTask.id)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        }),
+        0
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "task" }, [
+      _c("div", { staticClass: "add-tasks" }, [
+        _c("h2", [_vm._v("Today's Task")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "add-action" }, [
+          _c("img", { attrs: { src: "/images/add.png", alt: "" } })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "tasks-list" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "add-tasks" }, [
+      _c("h2", [_vm._v("Upcoming")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "add-action" }, [
+        _c("img", { attrs: { src: "/images/add.png", alt: "", srcset: "" } })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38091,7 +38296,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("Body")
+  return _c("div", { staticClass: "mcontainer" }, [_c("Body")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true

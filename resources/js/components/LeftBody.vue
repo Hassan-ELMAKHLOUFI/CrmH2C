@@ -1,5 +1,5 @@
 <template>
-<div class="Left">
+<div id="left">
     
      <img v-bind:src="hamburgerImg" alt="">
      <div class="profile">
@@ -14,6 +14,8 @@
     </div>
 
     <div class="project">
+          <h3>Projects <span>(18)</span></h3>
+     <div class="projects">
         <div class="a-project">
            <div class="box-color">
                <img v-bind:src="overlayImg" >
@@ -62,14 +64,7 @@
         </div>
 
 
-         <div class="a-project">
-           <div class="box-color">
-                <img v-bind:src="overlayImg" >
-               <span>LP</span>
-           </div>
-
-           <h6>Landing Page</h6>
-        </div>
+       
         
          <div class="a-project">
            <div class="box-color">
@@ -79,7 +74,7 @@
 
            <h6>Add Project</h6>
         </div>
-
+</div>
 
     </div>
 
@@ -89,12 +84,12 @@
 </template>
 
 <script>
-import add from "/images/users.png"
+import search from "/images/search.png"
 export default {
     
   data:function(){
       return {
-          searchImg:add,
+          searchImg:search,
           overlayImg:"../images/overlay.png",
           plusImg:"../images/plus.png",
           hamburgerImg:"../images/hamburger.png",

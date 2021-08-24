@@ -13,11 +13,15 @@ class UpcomingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function home(){
+         return view('welcome');
+     }
     public function index()
     {
          $upcoming = Upcoming::all();
-         //return UpcomingResource::collection($upcoming) ;
-         return view('welcome');
+         return UpcomingResource::collection($upcoming) ;
+     
     }
 
     /**
@@ -38,12 +42,15 @@ class UpcomingController extends Controller
      */
     public function store(Request $request)
     {
-        Upcoming::create([
-               'complated' =>$request->complated ,
-               'title' => $request->title,
-               'approved' =>$request->approved ,
-               'waiting' =>$request->waiting 
-        ]);
+
+        $upcoming = new Upcoming;
+
+        $upcoming->completed = $request->completed;
+        $upcoming->title = $request->title;
+        $upcoming->approved  = $request->approved;
+        $upcoming->waiting = $request->waiting;
+        $flight->save();
+
     }
 
     /**

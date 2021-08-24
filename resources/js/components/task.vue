@@ -1,5 +1,7 @@
 <template>
+<div class="mcontainer">
    <Body />
+</div>
 </template>
 
 <script>

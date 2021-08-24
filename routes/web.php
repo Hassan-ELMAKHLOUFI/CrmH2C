@@ -17,4 +17,4 @@ use App\Http\Controllers\UpcomingController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/{any}',  [UpcomingController::class, 'index'])->where('any', '.*');
+Route::get('/{any}',  [UpcomingController::class, 'home'])->where('any', '.*');
