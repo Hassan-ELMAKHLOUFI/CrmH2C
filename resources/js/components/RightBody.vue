@@ -53,19 +53,20 @@
 
                               <b-modal :id="upcomingtask.title" title="BootstrapVue">
                               <p class="my-4">{{upcomingtask.id}}</p>
-                              <input type="hidden" :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
-                              <input type="text" :name="'id'+upcomingtask.id" v-model="updatedTask" :value='upcomingtask.title'/>
+                                    <input type="hidden" :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
+                                    <input type="text" :name="'id'+upcomingtask.id" v-model="updatedTask" />
+                                    <p>{{updatedTask}}</p>
                               <template #modal-footer>
                                           <b>Custom Footer</b>
                                           <!-- Emulate built in modal footer ok and cancel button actions -->
                                           <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)">
                                           update
                                           </b-button>
-                                          <b-button size="sm" variant="danger" @click="cancel()">
+                                          <b-button size="sm" variant="danger" >
                                           Cancel
                                           </b-button>
                                           <!-- Button with custom close trigger value -->
-                                          <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
+                                          <b-button size="sm" variant="outline-secondary" >
                                           Forget it
                                           </b-button>
                                     </template>
@@ -152,10 +153,12 @@ export default {
         fetchTodayTasks(){
 
         },
+       filterByID(item) {
+                        },
         updateUpcomingTask(id){
             console.log(id);
-                        e.preventDefault();
             const updatedTasks ={
+                  idi:id,
                   title:this.updatedTask,
                   completed:false ,
                   approved:false,
@@ -169,7 +172,16 @@ export default {
                      },
                   body:JSON.stringify(updatedTasks)})
                 
-      .then(()=>{this.upcoming.push(updatedTasks);})
+      .then((data)=>{
+                const currentIndex = this.upcoming.indexOf(phone);
+
+    // update using an api that returns the updated data.
+    var updatedPhone = update(phone.id)
+
+    this.phones.splice(currentIndex, 1, updatedPhone)
+
+
+      })
         }
 
    }

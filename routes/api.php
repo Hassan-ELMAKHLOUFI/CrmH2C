@@ -16,6 +16,8 @@ Route::get("/upcoming" ,  [UpcomingController::class, 'index']);
 
 Route::post ("/upcoming" , [UpcomingController::class, 'store']);
 
+Route::put ("/upcoming" , [UpcomingController::class, 'update']);
+
 Route ::delete ("/upcoming/{id}", function ($id){
     DB::table('upcomings')->where('id',$id)->delete(); 
     return 200 ;

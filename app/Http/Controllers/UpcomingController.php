@@ -85,9 +85,14 @@ class UpcomingController extends Controller
      * @param  \App\Models\Upcoming  $upcoming
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Upcoming $upcoming)
+    public function update(Request $request)
     {
-        //
+        $request =json_decode($request->getContent());
+
+        $upcoming= Upcoming::findOrFail($request->idi);
+         $upcoming->title = $request->title;
+         $upcoming->save();
+        return $upcoming;
     }
 
     /**
