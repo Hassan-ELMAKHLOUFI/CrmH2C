@@ -10,7 +10,7 @@
         <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
     </head>
-    <body class="antialiased">
+    <body>
        <div id="app">
        <router-view></router-view>
        </div>

@@ -36,20 +36,48 @@
               <li v-for="upcomingtask in upcoming" v-bind:key="upcomingtask.id">
                     <div class="info">
                           <div class="left">
-                                <label class="myCheckbox">
-                                      <input type="checkbox" name="test" :checked="upcomingtask.completed" @change="checkedUpcoming(upcomingtask.id)"/>
-                                      <span></span>
+                               <label class="myCheckbox">
+                                      <input 
+                                      type="checkbox" name="test" 
+                                      :checked="upcomingtask.completed"
+                                       @change="checkedUpcoming(upcomingtask.id)"
+                                       />
+                                      
+                                       <span></span>
                                 </label>
                                 <h4>{{upcomingtask.title}}</h4>
                           </div>
+                          
                           <div class="right">
-                              <img src="/images/edit.png" alt="">
-                              <img src="/images/del.png" alt="" @click="delUpcoming(upcomingTask.id)">
+                              <img v-b-modal="upcomingtask.title" src="/images/edit.png"  alt="">
+
+                              <b-modal :id="upcomingtask.title" title="BootstrapVue">
+                              <p class="my-4">{{upcomingtask.id}}</p>
+                              <input type="hidden" :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
+                              <input type="text" :name="'id'+upcomingtask.id" v-model="updatedTask" :value='upcomingtask.title'/>
+                              <template #modal-footer>
+                                          <b>Custom Footer</b>
+                                          <!-- Emulate built in modal footer ok and cancel button actions -->
+                                          <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)">
+                                          update
+                                          </b-button>
+                                          <b-button size="sm" variant="danger" @click="cancel()">
+                                          Cancel
+                                          </b-button>
+                                          <!-- Button with custom close trigger value -->
+                                          <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
+                                          Forget it
+                                          </b-button>
+                                    </template>
+                              </b-modal>
+                              <img src="/images/del.png"  @click="delUpcoming(upcomingtask.id)"/>
+                              
                           </div>
                     </div>
               </li>
         </ul>
   </div>
+
 </div>
 </template>
 
@@ -61,6 +89,7 @@ export default {
             todayTask:[],
             upcoming :[],
             newTask:"",
+            updatedTask:""
 
        };
        
@@ -85,33 +114,68 @@ export default {
          },
          addUpcomingTask(e){
             e.preventDefault();
-            const newTask ={
-                  "title":this.newTask,
-                  "completed":false ,
-                  "approved":false,
-                  "waiting":true
+            const newTasks ={
+                  title:this.newTask,
+                  completed:false ,
+                  approved:false,
+                  waiting:true
             };
-            fetch('api/upcoming' ,{
+            fetch('/api/upcoming' ,{
                   method:'POST',
                   header:{
-                     "content-type":"application/json"},
-                  body:JSON.stringify(newTask)
-                  
-            }).then(()=>{this.upcoming.push(newTask);console.log(newTask)});
-
-            this.newTask=""
+                     'Accept': 'application/json',
+                     "content-type":"application/json"
+                     },
+                  body:JSON.stringify(newTasks)})
+                
+      .then(()=>{this.upcoming.push(newTasks);})
          },
-         delUpcomingTask(){},
+         delUpcoming(id){
+               console.log(id)
+            if(confirm("are you sure ?")){
+                  fetch(`/api/upcoming/${id}`,{
+                        method:'delete',
+                  })
+                  .then(() => {
 
-         checkedUpcoming(){},
+                        this.upcoming=this.upcoming.filter(
+                           ({ id:i })=> i !== id
+                        );
+                  }).catch((err)=> console.log(err))
+            }
+         },
+
+         checkedUpcoming(id){
+              console.log()
+         },
          //Today Task method 
         fetchTodayTasks(){
 
+        },
+        updateUpcomingTask(id){
+            console.log(id);
+                        e.preventDefault();
+            const updatedTasks ={
+                  title:this.updatedTask,
+                  completed:false ,
+                  approved:false,
+                  waiting:true
+            };
+            fetch('/api/upcoming' ,{
+                  method:'PUT',
+                  header:{
+                     'Accept': 'application/json',
+                     "content-type":"application/json"
+                     },
+                  body:JSON.stringify(updatedTasks)})
+                
+      .then(()=>{this.upcoming.push(updatedTasks);})
         }
+
    }
 }
 </script>
 
 <style>
 
-</style>
+</style>-*

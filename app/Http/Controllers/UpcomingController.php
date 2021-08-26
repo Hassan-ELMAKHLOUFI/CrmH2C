@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Upcoming;
 use Illuminate\Http\Request;
 use App\Http\Resources\UpcomingResource;
-
+use Illuminate\Support\Facades\DB;
 class UpcomingController extends Controller
 {
     /**
@@ -42,15 +42,18 @@ class UpcomingController extends Controller
      */
     public function store(Request $request)
     {
+           $request =json_decode($request->getContent());
 
-        $upcoming = new Upcoming;
 
-        $upcoming->completed = $request->completed;
-        $upcoming->title = $request->title;
-        $upcoming->approved  = $request->approved;
-        $upcoming->waiting = $request->waiting;
-        $flight->save();
+        DB::table('upcomings')->insert([
+            'title' => $request->title,
+            'completed' => $request->completed,
+            'approved' => $request->approved,
+            'waiting' => $request->waiting
+        ]);
 
+        
+   
     }
 
     /**

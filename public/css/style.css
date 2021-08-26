@@ -15,7 +15,7 @@
 body {
   position: relative;
   font-family: "MyriadProRegular";
-  background-color: var(--primary1); }
+  background-color: var(--primary1) !important; }
   body::-webkit-scrollbar {
     display: none;
     scrollbar-width: none; }
@@ -66,7 +66,7 @@ body {
       padding-left: 55px;
       margin-top: 39px;
       position: relative;
-      background-color: #70707050;
+      background-color: #a5787850 !important;
       height: 53px;
       margin-bottom: 35px;
       width: 90%; }
@@ -82,8 +82,8 @@ body {
         height: 100%;
         caret-color: var(--white); }
         .mcontainer #body #left .search input::placeholder {
-          background-color: unset;
-          color: var(--customgrey);
+          background-color: unset !important;
+          color: var(--customgrey) !important;
           font-family: 'Open Sans', sans-serif;
           font-size: 14px; }
     .mcontainer #body #left .project {
@@ -137,9 +137,9 @@ body {
             width: 100px;
             height: 94px !important; }
           .mcontainer #body #left .project .projects .a-project:nth-child(1) div.box-color {
-            background-color: var(--customblue); }
+            background-color: var(--customblue) !important; }
           .mcontainer #body #left .project .projects .a-project:nth-child(2) div.box-color {
-            background-color: var(--custompink); }
+            background-color: var(--custompink) !important; }
           .mcontainer #body #left .project .projects .a-project:nth-child(3) div.box-color {
             background-color: var(--customeyellow); }
           .mcontainer #body #left .project .projects .a-project:nth-child(4) div.box-color {
@@ -253,16 +253,16 @@ body {
                   border: 2px solid var(--customgreen1); }
                 .mcontainer #body #right .tasks .tasks-list li .info .left label input [type=checkbox]:checked + span:before,
                 .mcontainer #body #right .upcoming .tasks-list li .info .left label input [type=checkbox]:checked + span:before {
-                  content: '\2714' !important;
+                  content: '\2714';
                   height: 20px;
                   width: 20px;
-                  border-radius: 50px !important;
-                  border: 2px solid var(--customgreen1) !important;
-                  background-color: var(--customgreen1) !important;
+                  border-radius: 50px;
+                  border: 2px solid var(--customgreen1);
+                  background-color: var(--customgreen1);
                   opacity: 1;
                   font-size: 12px;
-                  top: 45% !important;
-                  color: #fff !important; }
+                  top: 45%;
+                  color: #fff; }
               .mcontainer #body #right .tasks .tasks-list li .info .left h4,
               .mcontainer #body #right .upcoming .tasks-list li .info .left h4 {
                 margin-left: 15px;

@@ -19,7 +19,7 @@
 body {
     position: relative;
     font-family: "MyriadProRegular";
-    background-color: var(--primary1);
+    background-color: var(--primary1) !important;
 
     &::-webkit-scrollbar {
         display: none;
@@ -47,7 +47,7 @@ body {
         grid-template-areas: "Left Right";
         padding: 16px;
 
-        #left {
+        #left{
             grid-area: Left;
             padding: 15%;
             position: relative;
@@ -85,7 +85,7 @@ body {
                 padding-left: 55px;
                 margin-top: 39px;
                 position: relative;
-                background-color: #70707050;
+                background-color: #a5787850 !important;
                 height: 53px;
                 margin-bottom: 35px;
                 width: 90%;
@@ -106,8 +106,8 @@ body {
                     caret-color: var(--white);
 
                     &::placeholder {
-                        background-color: unset;
-                        color: var(--customgrey);
+                        background-color: unset !important;
+                        color: var(--customgrey) !important;
                         font-family: 'Open Sans', sans-serif;
                         font-size: 14px;
                     }
@@ -188,14 +188,14 @@ body {
 
                         &:nth-child(1) {
                             div.box-color {
-                                background-color: var(--customblue);
+                                background-color: var(--customblue) !important;
                                 @extend .customwidth;
                             }
                         }
 
                         &:nth-child(2) {
                             div.box-color {
-                                background-color: var(--custompink);
+                                background-color: var(--custompink) !important;
                                 @extend .customwidth;
                             }
                         }
@@ -362,17 +362,17 @@ body {
                                     }
 
                                     input [type=checkbox]:checked+span:before {
-                                        content: '\2714' !important;
+                                        content: '\2714';
                                         @extend .middle ;
                                         height: 20px;
                                         width: 20px;
-                                        border-radius: 50px !important;
-                                        border: 2px solid var(--customgreen1) !important;
-                                        background-color: var(--customgreen1) !important;
+                                        border-radius: 50px ;
+                                        border: 2px solid var(--customgreen1);
+                                        background-color: var(--customgreen1);
                                         opacity: 1;
                                         font-size: 12px;
-                                        top: 45% !important;
-                                        color: #fff !important;
+                                        top: 45%;
+                                        color: #fff;
                                     }
                                 }
 
