@@ -52,23 +52,18 @@
                               <img v-b-modal="upcomingtask.title" src="/images/edit.png"  alt="">
 
                               <b-modal :id="upcomingtask.title" title="BootstrapVue">
-                              <p class="my-4">{{upcomingtask.id}}</p>
+                             
                                     <input type="hidden" :name="'id'+upcomingtask.id" :value='upcomingtask.id'/>
-                                    <input type="text" :name="'id'+upcomingtask.id" v-model="updatedTask" />
-                                    <p>{{updatedTask}}</p>
+        
+                                    <input type="text" :id="'id'+upcomingtask.id"  :value="upcomingtask.title" />
                               <template #modal-footer>
                                           <b>Custom Footer</b>
                                           <!-- Emulate built in modal footer ok and cancel button actions -->
                                           <b-button size="sm" variant="success" @click="updateUpcomingTask(upcomingtask.id)">
                                           update
                                           </b-button>
-                                          <b-button size="sm" variant="danger" >
-                                          Cancel
-                                          </b-button>
-                                          <!-- Button with custom close trigger value -->
-                                          <b-button size="sm" variant="outline-secondary" >
-                                          Forget it
-                                          </b-button>
+                
+             
                                     </template>
                               </b-modal>
                               <img src="/images/del.png"  @click="delUpcoming(upcomingtask.id)"/>
@@ -101,6 +96,8 @@ export default {
       this.fetchUpcoming();
    },
    methods:{
+
+
          //Upcoming Task
 
          fetchUpcoming(){
@@ -125,12 +122,13 @@ export default {
                   method:'POST',
                   header:{
                      'Accept': 'application/json',
-                     "content-type":"application/json"
+                     "content-type" : "application/json"
                      },
                   body:JSON.stringify(newTasks)})
                 
       .then(()=>{this.upcoming.push(newTasks);})
-         },
+     },
+
          delUpcoming(id){
                console.log(id)
             if(confirm("are you sure ?")){
@@ -153,13 +151,21 @@ export default {
         fetchTodayTasks(){
 
         },
-       filterByID(item) {
-                        },
+     editSchoolName (id, title) {
+            return this.upcoming.map(item => {
+                  
+                  if (item.id === id) {
+                        item.title = title;
+                  }
+                  return item;
+            });
+            },
+
         updateUpcomingTask(id){
             console.log(id);
             const updatedTasks ={
-                  idi:id,
-                  title:this.updatedTask,
+                  id:id,
+                  title:document.getElementById('id'+id).value,
                   completed:false ,
                   approved:false,
                   waiting:true
@@ -168,20 +174,13 @@ export default {
                   method:'PUT',
                   header:{
                      'Accept': 'application/json',
-                     "content-type":"application/json"
+                     "content-type" : "application/json"
                      },
                   body:JSON.stringify(updatedTasks)})
                 
-      .then((data)=>{
-                const currentIndex = this.upcoming.indexOf(phone);
-
-    // update using an api that returns the updated data.
-    var updatedPhone = update(phone.id)
-
-    this.phones.splice(currentIndex, 1, updatedPhone)
-
-
-      })
+      .then(()=>{
+                  this.editSchoolName(id,document.getElementById('id'+id).value)
+                  this.updatedTask=""})
         }
 
    }
@@ -190,4 +189,4 @@ export default {
 
 <style>
 
-</style>-*
+</style>

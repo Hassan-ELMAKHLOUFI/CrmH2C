@@ -89,10 +89,10 @@ class UpcomingController extends Controller
     {
         $request =json_decode($request->getContent());
 
-        $upcoming= Upcoming::findOrFail($request->idi);
+        $upcoming= Upcoming::findOrFail($request->id);
          $upcoming->title = $request->title;
          $upcoming->save();
-        return $upcoming;
+        return $request;
     }
 
     /**
