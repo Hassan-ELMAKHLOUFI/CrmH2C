@@ -30,6 +30,7 @@
  
                 <form action="" @submit="addUpcomingTask">
                     <input type="text" v-model="newTask">  
+                   
                 </form>
 
         <ul class="tasks-list">
@@ -78,6 +79,7 @@
 </template>
 
 <script>
+
 export default {
    data:function(){
        return{
@@ -85,7 +87,9 @@ export default {
             todayTask:[],
             upcoming :[],
             newTask:"",
-            updatedTask:""
+            updatedTask:"",
+            token   : ""
+
 
        };
        
@@ -118,24 +122,15 @@ export default {
                   approved:false,
                   waiting:true
             };
-            fetch('/api/upcoming' ,{
-                  method:'POST',
-                  header:{
-                     'Accept': 'application/json',
-                     "content-type" : "application/json"
-                     },
-                  body:JSON.stringify(newTasks)})
-                
-      .then(()=>{this.upcoming.push(newTasks);})
+               axios.post('/api/upcoming',newTasks).then(()=>{this.upcoming.push(newTasks);})
+          
+ 
      },
 
          delUpcoming(id){
                console.log(id)
             if(confirm("are you sure ?")){
-                  fetch(`/api/upcoming/${id}`,{
-                        method:'delete',
-                  })
-                  .then(() => {
+                  axios.delete(`/api/upcoming/${id}`).then(() => {
 
                         this.upcoming=this.upcoming.filter(
                            ({ id:i })=> i !== id
@@ -170,15 +165,7 @@ export default {
                   approved:false,
                   waiting:true
             };
-            fetch('/api/upcoming' ,{
-                  method:'PUT',
-                  header:{
-                     'Accept': 'application/json',
-                     "content-type" : "application/json"
-                     },
-                  body:JSON.stringify(updatedTasks)})
-                
-      .then(()=>{
+             axios.put('/api/upcoming',updatedTasks).then(()=>{
                   this.editSchoolName(id,document.getElementById('id'+id).value)
                   this.updatedTask=""})
         }
