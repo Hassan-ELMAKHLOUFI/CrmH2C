@@ -38,7 +38,19 @@ body {
     text-align: center;
     z-index: 1;
 }
-
+input [type=checkbox]:checked+span:before {
+    content: '\2714';
+    @extend .middle ;
+    height: 20px;
+    width: 20px;
+    border-radius: 50px ;
+    border: 2px solid var(--customgreen1);
+    background-color: var(--customgreen1);
+    opacity: 1;
+    font-size: 12px;
+    top: 45%;
+    color: #fff;
+}
 
 .mcontainer {
     #body {
@@ -361,19 +373,7 @@ body {
                                         border: 2px solid var(--customgreen1);
                                     }
 
-                                    input [type=checkbox]:checked+span:before {
-                                        content: '\2714';
-                                        @extend .middle ;
-                                        height: 20px;
-                                        width: 20px;
-                                        border-radius: 50px ;
-                                        border: 2px solid var(--customgreen1);
-                                        background-color: var(--customgreen1);
-                                        opacity: 1;
-                                        font-size: 12px;
-                                        top: 45%;
-                                        color: #fff;
-                                    }
+
                                 }
 
                                 h4 {

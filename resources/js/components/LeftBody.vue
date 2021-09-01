@@ -2,6 +2,7 @@
 <div id="left">
     
      <img v-bind:src="hamburgerImg" alt="">
+     <button @click.prevent="logout">logout</button>
      <div class="profile">
          <h1>Hi Hassan</h1>
          <h2> Let's make project more amazing</h2>
@@ -92,12 +93,19 @@ export default {
           searchImg:search,
           overlayImg:"../images/overlay.png",
           plusImg:"../images/plus.png",
-          hamburgerImg:"../images/hamburger.png",
-          
+          hamburgerImg:"../images/hamburger.png",       
+      }    
+  },
+  methods:{
+      logout(){
+          axios.post('/api/logout').then(()=>{
+              this.$router.push({name:'Home'});
+          })
       }
   }
     }
 </script>
 
 <style lang="css">
+
 </style> 

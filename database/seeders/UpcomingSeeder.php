@@ -21,6 +21,7 @@ class UpcomingSeeder extends Seeder
                'completed' =>false ,
                'title' => $fake->sentence ($nbWords = 4,$varialbeWords=false ),
                'approved' =>false ,
+               'deadline' => $fake->date ,
                'waiting' => true 
            ]);
        }

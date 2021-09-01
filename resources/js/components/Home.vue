@@ -4,7 +4,7 @@
        <router-link to="/register">create Account</router-link> 
        <br>
        <router-link to="/login">login</router-link> 
-        {{ csrf_field() }}
+      
     </div>
 
 

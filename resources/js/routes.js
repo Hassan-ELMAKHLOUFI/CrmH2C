@@ -4,6 +4,7 @@ import client from './components/client';
 import Home from './components/Home';
 import login from './components/login';
 import register from './components/register';
+import axios from 'axios';
 export default{
     mode: 'history',
     linkActiveClass: 'font-semibold',
@@ -25,7 +26,7 @@ export default{
         {
             path: '/',
             component: Home,
-            name: "home"
+            name: "Home"
         },
    
         {
@@ -36,7 +37,14 @@ export default{
         {
             path: '/task',
             component: task,
-            name:"task"
+            name:"task",
+            beforeEnter:(to,form,next)=>{
+                axios.get('/api/authenticated').then(()=>{
+                    next()
+                }).catch(()=>{
+                    return next({name:'login'})
+                })
+            }
         },
         {
             path: '/client',

@@ -11,7 +11,7 @@
     </head>
     <body>
        <div id="app">
-       <router-view> {{ csrf_field()}}</router-view>
+       <router-view></router-view>
        </div>
     <script src="{{asset('js/app.js')}}"></script>
     </body>
