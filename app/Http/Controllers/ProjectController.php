@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\project;
 use Illuminate\Http\Request;
-
+use App\Http\Resources\projectResource;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -42,7 +44,8 @@ class ProjectController extends Controller
         DB::table('projects')->insert([
             'name' => $request->name,
             'description' => $request->description,
-            'fnished' => $request->finished
+            'finished' => $request->finished,
+            'user_id'=>auth::user()->id
         ]);
     }
 
@@ -83,6 +86,7 @@ class ProjectController extends Controller
          $project->name = $request->name;
          $project->description = $request->description;
          $project->finished = $request->finished ;
+
          $project->save();
 
         return $request;

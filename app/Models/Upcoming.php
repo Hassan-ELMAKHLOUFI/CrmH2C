@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Upcoming extends Model
 {
     use HasFactory;
-    protected $fillable = ['title' , 'completed' , 'approved' ,'waiting'];
+    protected $fillable = ['title' , 'completed' , 'approved' ,'waiting','project_id'];
 }

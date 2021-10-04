@@ -22,7 +22,8 @@ class UpcomingSeeder extends Seeder
                'title' => $fake->sentence ($nbWords = 4,$varialbeWords=false ),
                'approved' =>false ,
                'deadline' => $fake->date ,
-               'waiting' => true 
+               'waiting' => true ,
+               'project_id'=>$i+1
            ]);
        }
     }

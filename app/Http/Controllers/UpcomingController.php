@@ -21,7 +21,14 @@ class UpcomingController extends Controller
     {
          $upcoming = Upcoming::all();
          return UpcomingResource::collection($upcoming) ;
-     
+
+    }
+
+    public function ClientIndex($id)
+    {
+        $upcoming = Upcoming::query()->where('project_id','=',$id)->get();
+        return UpcomingResource::collection($upcoming) ;
+
     }
 
     /**
@@ -49,11 +56,13 @@ class UpcomingController extends Controller
             'title' => $request->title,
             'completed' => $request->completed,
             'approved' => $request->approved,
-            'waiting' => $request->waiting
+            'waiting' => $request->waiting,
+            'deadline' => $request->deadline,
+            'project_id'=>$request->project_id
         ]);
 
-        
-   
+
+
     }
 
     /**
@@ -90,8 +99,8 @@ class UpcomingController extends Controller
         $request =json_decode($request->getContent());
 
         $upcoming= Upcoming::findOrFail($request->id);
-         $upcoming->title = $request->title;
-         $upcoming->save();
+        $upcoming->title = $request->title;
+        $upcoming->save();
         return $request;
     }
 
@@ -103,6 +112,6 @@ class UpcomingController extends Controller
      */
     public function destroy(Upcoming $upcoming)
     {
-        
+
     }
 }

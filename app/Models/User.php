@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected static $logFillable= true;
+    use LogsActivity;
     protected $fillable = [
         'name',
         'email',

@@ -19,6 +19,7 @@ class projectResource extends JsonResource
             'name' => $this->name ,
             'description' => $this->description ,
             'finished' =>$this->finished,
+            'user_id'=>$this->user_id
 
         ];
     }

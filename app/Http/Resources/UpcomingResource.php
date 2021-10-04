@@ -20,7 +20,8 @@ class UpcomingResource extends JsonResource
             'completed' => $this->completed ,
             'approved' =>$this->approved,
             'waiting' => $this->waiting,
-            'deadline' =>$this->deadline
+            'deadline' =>$this->deadline,
+            'project_id'=>$this->project_id
 
         ];
     }

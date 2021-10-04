@@ -19,7 +19,8 @@ class projectSeeder extends Seeder
             project::create([
                 'name' =>$fake->name,
                 'description' => $fake->sentence ($nbWords = 4,$varialbeWords=false ),
-                'finished' =>false  
+                'finished' =>false  ,
+                'user_id'=>$i+1
             ]);
         }
     }
