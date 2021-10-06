@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UpcomingController;
 use App\Http\Controllers\projectController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\DB;
@@ -64,3 +65,10 @@ Route ::delete ("/project/{id}", function ($id){
     return 200 ;
 
 });
+
+
+
+//Activity
+Route::get("/activity" ,  [ActivityController::class, 'index']);
+Route::post ("/activity" , [ActivityController::class, 'store']);
+
