@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UpcomingController;
@@ -51,6 +52,12 @@ Route::put ("/upcoming" , [UpcomingController::class, 'update']);
 
 Route ::delete ("/upcoming/{id}", function ($id){
     DB::table('upcomings')->where('id',$id)->delete();
+    DB::table('Activities')->insert([
+        'name' => "delete task",
+        'description' => "description of deleting a task",
+        'created_at'=>Carbon::now(),
+        'user_id'=>Auth::user()->id
+    ]);
     return 200 ;
 
 });

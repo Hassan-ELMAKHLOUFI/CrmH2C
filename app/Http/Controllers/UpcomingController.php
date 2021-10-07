@@ -6,6 +6,8 @@ use App\Models\Upcoming;
 use Illuminate\Http\Request;
 use App\Http\Resources\UpcomingResource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class UpcomingController extends Controller
 {
     /**
@@ -61,6 +63,12 @@ class UpcomingController extends Controller
             'project_id'=>$request->project_id
         ]);
 
+        DB::table('Activities')->insert([
+            'name' => "add new task",
+            'description' => "description of adding a new upcoming task",
+            'created_at'=>Carbon::now(),
+            'user_id'=>Auth::user()->id
+        ]);
 
 
     }
@@ -101,6 +109,14 @@ class UpcomingController extends Controller
         $upcoming= Upcoming::findOrFail($request->id);
         $upcoming->title = $request->title;
         $upcoming->save();
+
+        DB::table('Activities')->insert([
+            'name' => "apdating task",
+            'description' => "description updating a task",
+            'created_at'=>Carbon::now(),
+            'user_id'=>Auth::user()->id
+        ]);
+
         return $request;
     }
 
