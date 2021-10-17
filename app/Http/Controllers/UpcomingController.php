@@ -26,6 +26,24 @@ class UpcomingController extends Controller
 
     }
 
+
+    public function Pagination($page)
+    {
+        $test=[];
+        $upcoming = DB::table('upcomings')
+            ->offset($page*3)
+            ->limit(3)
+            ->get();
+        $upcomingJson = UpcomingResource::collection($upcoming) ;
+        //$laux= json_decode($projectJson);
+        array_push($test, $upcomingJson);
+        array_push($test, $page);
+
+
+        return json_encode($test) ;
+    }
+
+
     public function ClientIndex($id)
     {
         $upcoming = Upcoming::query()->where('project_id','=',$id)->get();

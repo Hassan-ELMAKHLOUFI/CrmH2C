@@ -9,8 +9,6 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\DB;
-use App\Models\Upcoming ;
-use App\Models\project ;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -45,7 +43,7 @@ Route::post("/register",[RegisterController::class,'store']);
 
 //upcoming
 Route::get("/upcoming" ,  [UpcomingController::class, 'index']);
-Route::get("/upcoming/{id}" ,  [UpcomingController::class, 'clientIndex']);
+Route::get ("/upcoming/{page}" , [UpcomingController::class, 'Pagination']);
 
 Route::post ("/upcoming" , [UpcomingController::class, 'store']);
 Route::put ("/upcoming" , [UpcomingController::class, 'update']);
@@ -67,6 +65,7 @@ Route ::delete ("/upcoming/{id}", function ($id){
 Route::get("/project" ,  [projectController::class, 'index']);
 Route::post ("/project" , [projectController::class, 'store']);
 Route::put ("/project" , [projectController::class, 'update']);
+Route::get ("/project/{page}" , [projectController::class, 'Pagination']);
 Route ::delete ("/project/{id}", function ($id){
     DB::table('projects')->where('id',$id)->delete();
     return 200 ;

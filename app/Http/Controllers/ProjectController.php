@@ -20,6 +20,23 @@ class ProjectController extends Controller
         return projectResource::collection($project) ;
     }
 
+    public function Pagination($page)
+    {
+        $test=[];
+        $project = DB::table('projects')
+            ->offset($page*3)
+            ->limit(3)
+            ->get();
+        $projectJson = projectResource::collection($project);
+
+        //$laux= json_decode($projectJson);
+        array_push($test, $projectJson);
+        array_push($test, $page);
+
+
+        return json_encode($test) ;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
