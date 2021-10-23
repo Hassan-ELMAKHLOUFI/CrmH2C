@@ -72,6 +72,15 @@ Route ::delete ("/project/{id}", function ($id){
 
 });
 
+//user
+Route ::get ("/users", [RegisterController::class, 'fetch']);
+Route ::put ("/user", [RegisterController::class, 'update']);
+Route ::delete ("/user/{id}", function ($id){
+    DB::table('users')->where('id',$id)->delete();
+    return 200 ;
+
+});
+Route::post("/user",[RegisterController::class,'store']);
 
 
 //Activity
