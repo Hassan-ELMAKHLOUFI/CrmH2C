@@ -21,6 +21,24 @@ class ActivityController extends Controller
         return ActivityResource::collection($Activity) ;
     }
 
+    public function Pagination($page)
+    {
+        $test=[];
+        $Activity = DB::table('Activities')
+            ->offset($page*3)
+            ->limit(3)
+            ->get();
+        $ActivityJson = ActivityResource::collection($Activity);
+
+        //$laux= json_decode($projectJson);
+        array_push($test, $ActivityJson);
+        array_push($test, $page);
+
+
+        return json_encode($test) ;
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
