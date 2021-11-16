@@ -86,4 +86,4 @@ Route::post("/user",[RegisterController::class,'store']);
 //Activity
 Route::get("/activity" ,  [ActivityController::class, 'index']);
 Route::post ("/activity" , [ActivityController::class, 'store']);
-
+Route::get ("/activity/{page}" , [ActivityController::class, 'Pagination']);
